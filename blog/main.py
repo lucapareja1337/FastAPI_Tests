@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Depends,status,Response,HTTPException
 from . import schemas,models
+from fastapi.encoders import jsonable_encoder
 from .database import engine,SessionLocal
 from sqlalchemy.orm import Session
 app = FastAPI()
@@ -23,7 +24,7 @@ def create(request: schemas.Blog,db : Session = Depends(get_db)):
 
 @app.put('/blog/{id}',status_code=status.HTTP_202_ACCEPTED)
 def update(id, request: schemas.Blog, db: Session = Depends(get_db)):
-    db.query(models.Blog).filter(models.Blog.id == id).update(request)
+    db.query(models.Blog).filter(models.Blog.id == id).update(jsonable_encoder(request))
     db.commit()
     return 'updated'
     
