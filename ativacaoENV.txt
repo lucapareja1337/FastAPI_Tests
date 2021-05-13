@@ -1,3 +1,2 @@
-.\env\Scripts\Activate.ps1 => Utilizar no powershell
-uvicorn main:app --reload => Ativar o projeto 
-pip3 install -r requirements.txt => instalação dos requerimentos do projeto
+pipenv install => só quando instalar algo nos requirements
+pipenv shell => pra rodar os comandos do env.
